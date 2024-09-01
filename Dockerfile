@@ -8,6 +8,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 COPY app/ .
 
 FROM python:3.11-slim-buster as MAIN
+RUN apt-get update && apt-get -y install tesseract-ocr ffmpeg libsm6 libxext6
 COPY --from=BUILD /opt/venv /opt/venv
 COPY app/ /app
 ENV PATH="/opt/venv/bin:$PATH"
